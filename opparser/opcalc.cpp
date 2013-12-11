@@ -9,20 +9,20 @@ namespace OPParser {
     enum MonoOperType {mtPos, mtNeg, mtFac};
     enum FuncType {ftSin, ftCos, ftTan, ftASin, ftACos, ftATan,
                    ftSinH, ftCosH, ftTanH, ftASinH, ftACosH, ftATanH,
-                   ftLog, ftLog10, ftLog2, ftSqr, ftSqrt, ftAbs,
-                   ftErf, ftErfc, ftGamma, ftLGamma,
-                   ftCeil, ftFloor, ftTrunc, ftRound};
+                   ftLog, ftLog10, ftLog2, ftSqr, ftSqrt, ftAbs, ftSign,
+                   ftDeg, ftRad, ftErf, ftErfc, ftGamma, ftLGamma,
+                   ftCeil, ftFloor, ftTrunc, ftRound, ftInt};
 
     map <Input, FuncType> GetFunc = {
-        {L"sin", ftSin}, {L"cos", ftCos}, {L"tan", ftTan}, {L"asin", ftASin}, {L"acos", ftACos}, {L"atan", ftATan},
-        {L"sinh", ftSinH}, {L"cosh", ftCosH}, {L"tanh", ftTanH}, {L"asinh", ftASinH}, {L"acosh", ftACosH}, {L"atanh", ftATanH},
-        {L"log", ftLog}, {L"log10", ftLog10}, {L"log2", ftLog2}, {L"sqr", ftSqr}, {L"sqrt", ftSqrt}, {L"abs", ftAbs},
-        {L"erf", ftErf}, {L"erfc", ftErfc}, {L"gamma", ftGamma}, {L"lgamma", ftLGamma},
-        {L"ceil", ftCeil}, {L"floor", ftFloor}, {L"trunc", ftTrunc}, {L"round", ftRound}
+        {"sin", ftSin}, {"cos", ftCos}, {"tan", ftTan}, {"asin", ftASin}, {"acos", ftACos}, {"atan", ftATan},
+        {"sinh", ftSinH}, {"cosh", ftCosH}, {"tanh", ftTanH}, {"asinh", ftASinH}, {"acosh", ftACosH}, {"atanh", ftATanH},
+        {"log", ftLog}, {"log10", ftLog10}, {"log2", ftLog2}, {"sqr", ftSqr}, {"sqrt", ftSqrt}, {"abs", ftAbs}, {"sign", ftSign},
+        {"deg", ftDeg}, {"rad", ftRad}, {"erf", ftErf}, {"erfc", ftErfc}, {"gamma", ftGamma}, {"lgamma", ftLGamma},
+        {"ceil", ftCeil}, {"floor", ftFloor}, {"trunc", ftTrunc}, {"round", ftRound}, {"int", ftInt}
     };
 
     map <Input, CalcData> GetConst = {
-        {L"pi", M_PI}, {L"e", M_E}, {L"tau", 2 * M_PI}, {L"phi", (sqrt(5) - 1) / 2}, {L"inf", INFINITY}, {L"nan", NAN}, {L"ans", 0}
+        {"pi", M_PI}, {"e", M_E}, {"tau", 2 * M_PI}, {"phi", (sqrt(5) - 1) / 2}, {"inf", INFINITY}, {"nan", NAN}, {"ans", 0}
     };
 
     class NumToken;
@@ -157,6 +157,15 @@ namespace OPParser {
             case ftAbs:
                 tTarget->value = abs(tTarget->value);
                 break;
+            case ftSign:
+                tTarget->value = int(tTarget->value > 0) - int(tTarget->value < 0);
+                break;
+            case ftDeg:
+                tTarget->value *= (180 / M_PI);
+                break;
+            case ftRad:
+                tTarget->value *= (M_PI / 180);
+                break;
             case ftErf:
                 tTarget->value = erf(tTarget->value);
                 break;
@@ -180,6 +189,9 @@ namespace OPParser {
                 break;
             case ftRound:
                 tTarget->value = round(tTarget->value);
+                break;
+            case ftInt:
+                tTarget->value = int(tTarget->value);
                 break;
             }
         }
@@ -380,7 +392,7 @@ namespace OPParser {
     class NumLexer: public Lexer {
     public:
         bool tryGetToken(InputIter &now, const InputIter &end, Parser &parser) {
-            Input buffer = L"";
+            Input buffer = "";
 
             if ((*now >= '0' && *now <= '9') || *now == '.') {
                 // Accepted
@@ -400,9 +412,8 @@ namespace OPParser {
 
             // Generate token
 
-            // InputIter *endPtr;
-            wchar_t *endPtr;
-            CalcData number = wcstod(buffer.c_str(), &endPtr);
+            char *endPtr;
+            CalcData number = strtod(buffer.c_str(), &endPtr);
 
             check(*endPtr == 0, "Wrong format of number");
 
@@ -416,9 +427,9 @@ namespace OPParser {
     class NameLexer: public Lexer {
     public:
         bool tryGetToken(InputIter &now, const InputIter &end, Parser &parser) {
-            Input buffer = L"";
+            Input buffer = "";
 
-            if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || (*now >= 128) || *now == '_') {
+            if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || *now == '_') {
                 // Accepted
             } else {
                 // Not a name
@@ -427,7 +438,7 @@ namespace OPParser {
 
             // Read name to buffer
             for (; now != end; ++now) {
-                if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || (*now >= 128) || *now == '_' || (*now >= '0' && *now <= '9')) {
+                if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || *now == '_' || (*now >= '0' && *now <= '9')) {
                     buffer += *now;
                 } else {
                     break;
@@ -454,9 +465,9 @@ namespace OPParser {
     class NameRefLexer: public Lexer {
     public:
         bool tryGetToken(InputIter &now, const InputIter &end, Parser &parser) {
-            Input buffer = L"";
+            Input buffer = "";
 
-            if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || (*now >= 128) || *now == '_') {
+            if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || *now == '_') {
                 // Accepted
             } else {
                 // Not a name
@@ -465,7 +476,7 @@ namespace OPParser {
 
             // Read name to buffer
             for (; now != end; ++now) {
-                if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || (*now >= 128) || *now == '_' || (*now >= '0' && *now <= '9')) {
+                if ((*now >= 'A' && *now <= 'Z') || (*now >= 'a' && *now <= 'z') || *now == '_' || (*now >= '0' && *now <= '9')) {
                     buffer += *now;
                 } else {
                     break;
@@ -692,7 +703,7 @@ namespace OPParser {
 
         check(tResult != nullptr, "Bad result");
 
-        GetConst[L"ans"] = tResult->value;
+        GetConst["ans"] = tResult->value;
 
         return tResult->value;
     }

@@ -17,7 +17,7 @@ namespace OPParser {
     typedef int Level;
 
     // Input data type
-    typedef wstring Input;
+    typedef string Input;
 
     // Input iterator type
     typedef Input::const_iterator InputIter;
@@ -39,6 +39,12 @@ namespace OPParser {
     // Runtime checking (like assert)
     // If failed, throw error
     void check(const bool condition, const string &info);
+
+    // Error class
+    class opparser_error: public runtime_error {
+    public:
+        opparser_error(const string &e): runtime_error(e){}
+    };
 
     // Lexer particle, recognise token from string
     // Chain-factory, to create token
