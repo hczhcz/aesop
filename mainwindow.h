@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "mmlwidget/QtMmlWidget"
+#include "opparser/opcalc.hpp"
+#include "opparser/opcalcnear.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -11,14 +13,25 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
+private slots:
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_pushButton_57_clicked();
+
+    void on_pushButton_58_clicked();
+
+public slots:
+    void on_input();
+
 private:
     Ui::MainWindow *ui;
     QtMmlWidget *mml;
+    OPParser::Calc calc;
 };
 
 #endif // MAINWINDOW_H
