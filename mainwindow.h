@@ -35,6 +35,8 @@ private:
     Ui::MainWindow *ui;
     QtMmlWidget *mml;
     OPParser::Calc calc;
+
+    void doInsert(const QString &value, const int offset = 0);
 };
 
 #endif // MAINWINDOW_H

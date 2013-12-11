@@ -34,11 +34,62 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
 void MainWindow::on_input()
 {
-    // The button
-    QPushButton *button = (QPushButton *) sender();
+    // Insert the string from the button tool tip
+    doInsert(
+        ((QPushButton *) sender())->toolTip()
+    );
+}
 
-    const QString &newData = button->toolTip();
-    const QString &oldData = ui->lineEdit->text();
+void MainWindow::on_input_f()
+{
+    // Insert the string from the button text
+    doInsert(
+          ((QPushButton *) sender())->text()
+        + "()"
+    , -1);
+}
+
+void MainWindow::on_input_sct()
+{
+    const bool needDeg = ui->pushButton_13->isChecked();
+    const bool needArc = ui->pushButton_14->isChecked();
+
+    // Insert "deg()" for arc func
+    if (needDeg && needArc)
+    {
+        doInsert("deg()", -1);
+    }
+
+    // Insert the string from the button text and "arc" button
+    doInsert(
+          (needArc ? "a" : "")
+        + ((QPushButton *) sender())->text()
+        + "()"
+    , -1);
+
+    // Insert "rad()" for non-arc func
+    if (needDeg && !needArc)
+    {
+        doInsert("rad()", -1);
+    }
+
+}
+
+void MainWindow::on_input_scth()
+{
+    const bool needArc = ui->pushButton_14->isChecked();
+
+    // Insert the string from the button text and "arc" button
+    doInsert(
+          (needArc ? "a" : "")
+        + ((QPushButton *) sender())->text()
+        + "()"
+    , -1);
+}
+
+void MainWindow::doInsert(const QString &value, const int offset)
+{
+    const QString &old = ui->lineEdit->text();
 
     // If one is letter and another is letter or digit, add " "
     // For example, "3" + "pi" -> "3 pi"
@@ -47,13 +98,12 @@ void MainWindow::on_input()
         &&
         (
             (
-                (*(oldData.end()-1)).isLetter() && newData[0].isLetterOrNumber()
+                (*(old.end()-1)).isLetter() && value[0].isLetterOrNumber()
             )
             ||
             (
-                newData[0].isLetter() && (*(oldData.end()-1)).isLetterOrNumber()
+                value[0].isLetter() && (*(old.end()-1)).isLetterOrNumber()
             )
-
         )
     )
     {
@@ -61,19 +111,10 @@ void MainWindow::on_input()
     }
 
     // Do insert
-    ui->lineEdit->insert(newData);
-}
+    ui->lineEdit->insert(value);
 
-void MainWindow::on_input_f()
-{
-}
-
-void MainWindow::on_input_sct()
-{
-}
-
-void MainWindow::on_input_scth()
-{
+    // Do move
+    ui->lineEdit->setCursorPosition(ui->lineEdit->cursorPosition() + offset);
 }
 
 void MainWindow::on_pushButton_57_clicked()
