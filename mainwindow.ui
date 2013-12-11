@@ -83,6 +83,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>ins</string>
      </property>
@@ -109,6 +112,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>deg</string>
      </property>
@@ -132,6 +138,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>arc</string>
      </property>
@@ -153,6 +162,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>sin</string>
      </property>
@@ -170,6 +182,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>cos</string>
@@ -189,6 +204,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>tan</string>
      </property>
@@ -206,6 +224,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>deg</string>
@@ -225,6 +246,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>log</string>
      </property>
@@ -242,6 +266,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>rad</string>
@@ -261,6 +288,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>log10</string>
      </property>
@@ -278,6 +308,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>erf</string>
@@ -297,6 +330,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>log2</string>
      </property>
@@ -314,6 +350,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>erfc</string>
@@ -333,6 +372,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>sinh</string>
      </property>
@@ -350,6 +392,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>gamma</string>
@@ -369,6 +414,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>cosh</string>
      </property>
@@ -387,6 +435,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>lgamma</string>
      </property>
@@ -404,6 +455,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>tanh</string>
@@ -439,6 +493,12 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>7</string>
+     </property>
      <property name="text">
       <string>7</string>
      </property>
@@ -456,6 +516,12 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>8</string>
      </property>
      <property name="text">
       <string>8</string>
@@ -475,6 +541,12 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>9</string>
+     </property>
      <property name="text">
       <string>9</string>
      </property>
@@ -492,6 +564,12 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>4</string>
      </property>
      <property name="text">
       <string>4</string>
@@ -511,6 +589,12 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>5</string>
+     </property>
      <property name="text">
       <string>5</string>
      </property>
@@ -528,6 +612,12 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>6</string>
      </property>
      <property name="text">
       <string>6</string>
@@ -547,6 +637,12 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>1</string>
+     </property>
      <property name="text">
       <string>1</string>
      </property>
@@ -564,6 +660,12 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>2</string>
      </property>
      <property name="text">
       <string>2</string>
@@ -583,6 +685,12 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>3</string>
+     </property>
      <property name="text">
       <string>3</string>
      </property>
@@ -601,6 +709,12 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>0</string>
+     </property>
      <property name="text">
       <string>0</string>
      </property>
@@ -618,6 +732,12 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>00</string>
      </property>
      <property name="text">
       <string>00</string>
@@ -651,7 +771,15 @@
      <property name="font">
       <font>
        <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>(</string>
      </property>
      <property name="text">
       <string>(</string>
@@ -669,7 +797,15 @@
      <property name="font">
       <font>
        <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>)</string>
      </property>
      <property name="text">
       <string>)</string>
@@ -691,8 +827,14 @@
        <bold>true</bold>
       </font>
      </property>
-     <property name="text">
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
       <string>/</string>
+     </property>
+     <property name="text">
+      <string>÷</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_21">
@@ -711,8 +853,14 @@
        <bold>true</bold>
       </font>
      </property>
-     <property name="text">
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
       <string>*</string>
+     </property>
+     <property name="text">
+      <string>×</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_22">
@@ -730,6 +878,12 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>-</string>
      </property>
      <property name="text">
       <string>-</string>
@@ -751,6 +905,12 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>+</string>
+     </property>
      <property name="text">
       <string>+</string>
      </property>
@@ -769,8 +929,14 @@
        <pointsize>10</pointsize>
       </font>
      </property>
-     <property name="text">
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
       <string>^</string>
+     </property>
+     <property name="text">
+      <string>x^y</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_37">
@@ -786,6 +952,12 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>%</string>
      </property>
      <property name="text">
       <string>mod</string>
@@ -805,8 +977,14 @@
        <pointsize>10</pointsize>
       </font>
      </property>
-     <property name="text">
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
       <string>!</string>
+     </property>
+     <property name="text">
+      <string>x!</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_39">
@@ -822,6 +1000,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>int</string>
@@ -841,6 +1022,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>sqr</string>
      </property>
@@ -858,6 +1042,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>round</string>
@@ -877,6 +1064,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>sqrt</string>
      </property>
@@ -894,6 +1084,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>ceil</string>
@@ -913,6 +1106,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>abs</string>
      </property>
@@ -930,6 +1126,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>floor</string>
@@ -949,6 +1148,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="text">
       <string>sign</string>
      </property>
@@ -966,6 +1168,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
      </property>
      <property name="text">
       <string>trunc</string>
@@ -986,8 +1191,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
-    <property name="text">
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
      <string>inf</string>
+    </property>
+    <property name="text">
+     <string>∞</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_49">
@@ -1004,8 +1215,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
-    <property name="text">
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
      <string>nan</string>
+    </property>
+    <property name="text">
+     <string>?</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_50">
@@ -1022,8 +1239,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
-    <property name="text">
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
      <string>tau</string>
+    </property>
+    <property name="text">
+     <string>τ</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_51">
@@ -1039,6 +1262,12 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>ans</string>
     </property>
     <property name="text">
      <string>ans</string>
@@ -1058,8 +1287,14 @@
       <pointsize>12</pointsize>
      </font>
     </property>
-    <property name="text">
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
      <string>-&gt;</string>
+    </property>
+    <property name="text">
+     <string>→</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_53">
@@ -1075,6 +1310,12 @@
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>x</string>
     </property>
     <property name="text">
      <string>x</string>
@@ -1094,8 +1335,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
-    <property name="text">
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
      <string>pi</string>
+    </property>
+    <property name="text">
+     <string>ᴨ</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_55">
@@ -1111,6 +1358,12 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>e</string>
     </property>
     <property name="text">
      <string>e</string>
@@ -1130,8 +1383,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
-    <property name="text">
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="toolTip">
      <string>phi</string>
+    </property>
+    <property name="text">
+     <string>φ</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_57">
@@ -1147,6 +1406,9 @@
      <font>
       <pointsize>9</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
     </property>
     <property name="text">
      <string>←</string>
@@ -1165,6 +1427,9 @@
      <font>
       <pointsize>9</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
     </property>
     <property name="text">
      <string>⌧</string>
@@ -1402,8 +1667,299 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_18</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_19</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_20</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_21</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_22</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_23</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_36</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_37</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_38</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_48</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_49</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_50</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_51</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_52</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_53</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_54</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_55</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_56</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_input()</slot>
+  <slot>on_input_f()</slot>
+  <slot>on_input_sct()</slot>
+  <slot>on_input_scth()</slot>
  </slots>
 </ui>
