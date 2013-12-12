@@ -26,7 +26,7 @@
    <string>Aesop Calculator</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QFrame" name="frame">
+   <widget class="QtMmlWidget" name="frame">
     <property name="geometry">
      <rect>
       <x>5</x>
@@ -1439,6 +1439,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QtMmlWidget</class>
+   <extends>QFrame</extends>
+   <header>mmlwidget\qtmmlwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>lineEdit</tabstop>
   <tabstop>pushButton_24</tabstop>

@@ -6,9 +6,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     ui->statusBar->showMessage("Ready", 0);
 
-    mml = new QtMmlWidget(this);
+    // Init MathML content
+    // mml->setContent("<math><ci>?</ci><co>=</co><cn>42</cn></math>");
+    // mml->setContent("<math><apply><log /><logbase><cn>3</cn></logbase><ci>x</ci></apply></math>");
+    ui->frame->setContent("<math><mi>asaaaaaa</mi><mo>&InvisibleTimes;</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mo>&InvisibleTimes; </mo><mi>x</mi><mo>+</mo><mi>c</mi></math>");
 
     calc.init();
 }
