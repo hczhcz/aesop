@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     opparser/opparser.cpp \
     opparser/opcalcnear.cpp \
     opparser/opcalc.cpp \
-    opmml/opmml.cpp
+    opmml/opmml.cpp \
+    opparser/opcalcrule.cpp
 
 HEADERS  += mainwindow.h \
     mmlwidget/QtMmlWidget \
