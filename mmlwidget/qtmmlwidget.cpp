@@ -5246,6 +5246,13 @@ QRect MmlMpaddedNode::symbolRect() const
 // QtMmlWidget
 // *******************************************************************
 
+//////// hack begin
+QSize QtMmlWidget::getSize() const
+{
+    return m_doc->size();
+}
+//////// hack end
+
 /*!
     \class QtMmlWidget
 

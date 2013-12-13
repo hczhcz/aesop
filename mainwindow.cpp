@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Init MathML content
     ui->frame->setContent(_MML(_MN(42)));
 
+    ui->frame->setBaseFontPointSize(16);
+
     calc.init();
     mml.init();
 }
@@ -23,16 +25,37 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
+    // Nothing
+    if (arg1.size() == 0) {
+        return;
+    }
     try
     {
+        // Do calculation
         calc.parse(arg1.toStdString());
         OPParser::CalcData resultC = calc.finishByData();
         mml.parse(arg1.toStdString());
         OPParser::MMLData resultM = mml.finishByData();
 
+        // Print
         ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
         ui->statusBar->showMessage(QString(resultM.c_str()));
         ui->frame->setContent(QString(resultM.c_str()));
+        ui->frame->setBaseFontPointSize(16);
+
+        // Scale the size to fit in
+        while (
+            (
+                ui->frame->getSize().width() > ui->frame->width()
+                ||
+                ui->frame->getSize().height() > ui->frame->height()
+            )
+            &&
+            ui->frame->baseFontPointSize() > 8
+        )
+        {
+            ui->frame->setBaseFontPointSize(ui->frame->baseFontPointSize() - 1);
+        }
     }
     catch (const OPParser::opparser_error &e)
     {

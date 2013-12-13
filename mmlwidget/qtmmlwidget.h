@@ -96,7 +96,11 @@ class QT_QTMMLWIDGET_EXPORT QtMmlWidget : public QFrame
 	virtual void paintEvent(QPaintEvent *e);
 
     private:
-	MmlDocument *m_doc;
+    MmlDocument *m_doc;
+    //////// hack begin
+    public:
+    QSize getSize() const;
+    //////// hack end
 };
 
 
