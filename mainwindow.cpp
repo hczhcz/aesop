@@ -25,8 +25,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
-    // Nothing
-    if (arg1.size() == 0) {
+    if (!ui->pushButton_59->isChecked() || arg1.size() == 0) {
+        // Do nothing
         return;
     }
     try
@@ -37,13 +37,22 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         mml.parse(arg1.toStdString());
         OPParser::MMLData resultM = mml.finishByData();
 
+        {
+            // Render result
+            using namespace OPParser;
+            resultM += _MO(=);
+            resultM += _MNVAL(std::to_string(resultC));
+
+            // Close MML
+            resultM = _MML(_MSTR(resultM));
+        }
+
         // Print
         ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
-        ui->statusBar->showMessage(QString(resultM.c_str()));
         ui->frame->setContent(QString(resultM.c_str()));
-        ui->frame->setBaseFontPointSize(16);
 
         // Scale the size to fit in
+        ui->frame->setBaseFontPointSize(16);
         while (
             (
                 ui->frame->getSize().width() > ui->frame->width()
@@ -158,4 +167,12 @@ void MainWindow::on_pushButton_57_clicked()
 void MainWindow::on_pushButton_58_clicked()
 {
     ui->lineEdit->clear();
+}
+
+void MainWindow::on_pushButton_59_clicked(bool checked)
+{
+    if (checked)
+    {
+        ui->lineEdit->textChanged(ui->lineEdit->text());
+    }
 }

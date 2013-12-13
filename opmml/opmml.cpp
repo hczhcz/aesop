@@ -704,6 +704,6 @@ namespace OPParser {
 
         check(tResult != nullptr, "Bad result");
 
-        return _MML(_MSTR(tResult->value));
+        return tResult->value;
     }
 }

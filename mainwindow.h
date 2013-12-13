@@ -26,6 +26,8 @@ private slots:
 
     void on_pushButton_58_clicked();
 
+    void on_pushButton_59_clicked(bool checked);
+
 public slots:
     void on_input();
     void on_input_f();
