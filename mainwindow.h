@@ -5,6 +5,7 @@
 #include "mmlwidget/QtMmlWidget"
 #include "opparser/opcalc.hpp"
 #include "opparser/opcalcnear.hpp"
+#include "opmml/opmml.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     OPParser::Calc calc;
+    OPParser::MML mml;
 
     void doInsert(const QString &value, const int offset = 0);
 };

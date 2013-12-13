@@ -10,11 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->showMessage("Ready", 0);
 
     // Init MathML content
-    // mml->setContent("<math><ci>?</ci><co>=</co><cn>42</cn></math>");
-    // mml->setContent("<math><apply><log /><logbase><cn>3</cn></logbase><ci>x</ci></apply></math>");
-    ui->frame->setContent("<math><mi>asaaaaaa</mi><mo>&InvisibleTimes;</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mo>&InvisibleTimes; </mo><mi>x</mi><mo>+</mo><mi>c</mi></math>");
+    ui->frame->setContent(_MML(_MN(42)));
 
     calc.init();
+    mml.init();
 }
 
 MainWindow::~MainWindow()
@@ -27,12 +26,19 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
     try
     {
         calc.parse(arg1.toStdString());
-        ui->statusBar->showMessage(QString(std::to_string(calc.finishByData()).c_str()));
+        OPParser::CalcData resultC = calc.finishByData();
+        mml.parse(arg1.toStdString());
+        OPParser::MMLData resultM = mml.finishByData();
+
+        ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
+        ui->statusBar->showMessage(QString(resultM.c_str()));
+        ui->frame->setContent(QString(resultM.c_str()));
     }
     catch (const OPParser::opparser_error &e)
     {
         ui->statusBar->showMessage(QString(e.what()));
         calc.init();
+        mml.init();
     }
 }
 
