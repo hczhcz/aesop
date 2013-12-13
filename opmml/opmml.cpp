@@ -1,6 +1,10 @@
 #include "opmml.hpp"
 
 namespace OPParser {
+    map <Input, MMLString> MMLConst = {
+        {"pi", _MIX(pi)}, {"tau", _MIX(tau)}, {"phi", _MIX(phiv)}, {"inf", _MIX(infin)}, {"nan", _MI(?)}, {"ans", _MI(#)}
+    };
+
     class MMLToken;
     class MMLFuncToken;
     class MMLAssignToken;
@@ -90,13 +94,13 @@ namespace OPParser {
                 tTarget->value = _MI(tan) _MAPPLY(tTarget->value);
                 break;
             case ftASin:
-                tTarget->value = _MI(sin) _MSUP(_MO(-) _MN(1)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MI(sin) _MN(-1)) _MAPPLY(tTarget->value);
                 break;
             case ftACos:
-                tTarget->value = _MI(cos) _MSUP(_MO(-) _MN(1)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MI(cos) _MN(-1)) _MAPPLY(tTarget->value);
                 break;
             case ftATan:
-                tTarget->value = _MI(tan) _MSUP(_MO(-) _MN(1)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MI(tan) _MN(-1)) _MAPPLY(tTarget->value);
                 break;
             case ftSinH:
                 tTarget->value = _MI(sinh) _MAPPLY(tTarget->value);
@@ -108,25 +112,25 @@ namespace OPParser {
                 tTarget->value = _MI(tanh) _MAPPLY(tTarget->value);
                 break;
             case ftASinH:
-                tTarget->value = _MI(sinh) _MSUP(_MO(-) _MN(1)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MI(sinh) _MN(-1)) _MAPPLY(tTarget->value);
                 break;
             case ftACosH:
-                tTarget->value = _MI(cosh) _MSUP(_MO(-) _MN(1)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MI(cosh) _MN(-1)) _MAPPLY(tTarget->value);
                 break;
             case ftATanH:
-                tTarget->value = _MI(tanh) _MSUP(_MO(-) _MN(1)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MI(tanh) _MN(-1)) _MAPPLY(tTarget->value);
                 break;
             case ftLog:
                 tTarget->value = _MI(ln) _MAPPLY(tTarget->value);
                 break;
             case ftLog10:
-                tTarget->value = _MI(log) _MSUB(_MN(10)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUB(_MI(log) _MN(10)) _MAPPLY(tTarget->value);
                 break;
             case ftLog2:
-                tTarget->value = _MI(log) _MSUB(_MN(2)) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUB(_MI(log) _MN(2)) _MAPPLY(tTarget->value);
                 break;
             case ftSqr:
-                tTarget->value = _MPRE(tTarget->value) _MSUP(_MN(2));
+                tTarget->value = _MSUP(_MPADDED(_MPP(tTarget->value)) _MN(2));
                 break;
             case ftSqrt:
                 tTarget->value = _MSQRT(_MSTR(tTarget->value));
@@ -138,10 +142,10 @@ namespace OPParser {
                 tTarget->value = _MI(sign) _MAPPLY(tTarget->value);
                 break;
             case ftDeg:
-                tTarget->value = _MI(deg) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MPADDED(_MPP(tTarget->value)) _MPADDED(_MO(r) _MOX(rarr) _MO(d)));
                 break;
             case ftRad:
-                tTarget->value = _MI(rad) _MAPPLY(tTarget->value);
+                tTarget->value = _MSUP(_MPADDED(_MPP(tTarget->value)) _MPADDED(_MO(d) _MOX(rarr) _MO(r)));
                 break;
             case ftErf:
                 tTarget->value = _MI(erf) _MAPPLY(tTarget->value);
@@ -150,10 +154,10 @@ namespace OPParser {
                 tTarget->value = _MI(erfc) _MAPPLY(tTarget->value);
                 break;
             case ftGamma:
-                tTarget->value = _MIX(gamma) _MAPPLY(tTarget->value);
+                tTarget->value = _MOX(Gamma) _MAPPLY(tTarget->value);
                 break;
             case ftLGamma:
-                tTarget->value = _MI(ln) _MIX(gamma) _MAPPLY(tTarget->value);
+                tTarget->value = _MI(ln) _MOX(Gamma) _MAPPLY(tTarget->value);
                 break;
             case ftCeil:
                 tTarget->value = _MI(ceil) _MAPPLY(tTarget->value);
@@ -258,17 +262,17 @@ namespace OPParser {
             case otDiv:
                 if (tLeft->value.type == mtBracket && tRight->value.type == mtBracket) {
                     // Fraction form
-                    tLeft->value = _MFRAC(_MSTR(tLeft->value) "" _MSTR(tRight->value));
+                    tLeft->value = _MFRAC(_MPADDED(_MSTR(tLeft->value)) _MPADDED(_MSTR(tRight->value)));
                 } else {
                     // Divide form
-                    tLeft->value = _MPRE(tLeft->value) _MO(/) _MPOST(tRight->value);
+                    tLeft->value = _MPRE(tLeft->value) _MOX(divide) _MPOST(tRight->value);
                 }
                 break;
             case otMod:
                 tLeft->value = _MPRE(tLeft->value) _MO(%) _MPOST(tRight->value);
                 break;
             case otPwr:
-                tLeft->value = _MPRE(tLeft->value) _MSUP(_MSTR(tRight->value));
+                tLeft->value = _MSUP(_MPADDED(_MPP(tLeft->value)) _MPADDED(_MSTR(tRight->value)));
                 break;
             }
         }
@@ -442,10 +446,15 @@ namespace OPParser {
             PToken token(nullptr);
             if (GetFunc.find(buffer) != GetFunc.end()) {
                 token = PToken(new MMLFuncToken(GetFunc[buffer]));
-            } else if (GetConst.find(buffer) != GetConst.end()) {
-                token = PToken(new MMLToken(_MIVAL(buffer)));
             } else {
-                error("Unknown function or constant");
+                auto iter = MMLConst.find(buffer);
+                if (iter != MMLConst.end()) {
+                    token = PToken(new MMLToken(iter->second));
+                } else if (GetConst.find(buffer) != GetConst.end()) {
+                    token = PToken(new MMLToken(_MIVAL(buffer)));
+                } else {
+                    error("Unknown function or constant");
+                }
             }
 
             parser.midPush(token);
@@ -695,6 +704,6 @@ namespace OPParser {
 
         check(tResult != nullptr, "Bad result");
 
-        return tResult->value;
+        return _MML(_MSTR(tResult->value));
     }
 }

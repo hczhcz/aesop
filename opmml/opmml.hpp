@@ -4,7 +4,9 @@
 #include "../opparser/opcalcrule.hpp"
 
 #define _MSTR(x) + MMLString(x) +
-#define _MAPPLY(x) + x.formatBracket(true)
+// #define _MAPPLY(x) + x.formatBracket(true)
+#define _MAPPLY(x) + x.formatBracket(false)
+#define _MPP(x) + x.formatBracket(false) +
 #define _MPRE(x) x.formatBracket(false) +
 #define _MPOST(x) + x.formatBracket(false)
 
@@ -23,6 +25,7 @@
 
 #define _MFENCED(x) _MNODE(fenced, x)
 #define _MFRAC(x) _MNODE(frac, x)
+#define _MPADDED(x) _MNODE(padded, x)
 #define _MSQRT(x) _MNODE(sqrt, x)
 #define _MSUB(x) _MNODE(sub, x)
 #define _MSUP(x) _MNODE(sup, x)
@@ -48,7 +51,7 @@ namespace OPParser {
         const MMLString formatBracket(bool force) const {
             if (force || type == mtBracket) {
                 // <mo>(</mo>data<mo>)</mo>
-                return _MFENCED(_MSTR(*this));
+                return _MFENCED(_MPADDED(_MSTR(*this)));
             } else {
                 return *this;
             }
