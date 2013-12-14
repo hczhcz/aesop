@@ -175,13 +175,35 @@ void MainWindow::doRun(const QString &value)
     {
         // Do calculation
         calc.parse(value.toStdString());
-        OPParser::CalcData resultC = calc.finishByData();
+        const OPParser::CalcData resultC = calc.finishByData();
+        const OPParser::CalcData resultCNear = fnear(resultC);
 
         std::string resultS = value.toStdString();
+
+        // If not NaN, find near value
+        if (resultCNear == resultCNear)
         {
-            // Generate output equation
+            // Find x ~= result
+            const auto found1 = OPParser::NearValue.find(resultCNear);
+            if (found1 != OPParser::NearValue.end())
+            {
+                resultS += "=" + found1->second;
+            }
+            else
+            {
+                // Find x ~= -result
+                const auto found2 = OPParser::NearValue.find(-resultCNear);
+                if (found2 != OPParser::NearValue.end())
+                {
+                    resultS += "=" + found2->second;
+                }
+            }
+        }
+
+        {
+            // Format result as string
             std::ostringstream oss;
-            oss << resultC;
+            oss << resultCNear;
             auto floatS = oss.str();
 
             // Format exp
@@ -191,13 +213,12 @@ void MainWindow::doRun(const QString &value)
                 floatS.replace(ePos, 1, " e^");
             }
 
-            resultS += "=";
-            resultS += floatS;
+            resultS += "=" + floatS;
         }
 
         // Generate MML
         mml.parse(resultS);
-        OPParser::MMLData resultM = mml.finishByData();
+        const OPParser::MMLData resultM = mml.finishByData();
 
         // Print
         ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));

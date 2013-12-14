@@ -1,8 +1,8 @@
 #include "opmml.hpp"
 
 namespace OPParser {
-    const Level levelEqualL = 127;
-    const Level levelEqualR = 128;
+    const Level levelEqualL = -1; // levelFlushAll;
+    const Level levelEqualR = levelAcceptAll;
 
     map <Input, MMLString> MMLConst = {
         {"pi", _MIX(pi)}, {"tau", _MIX(tau)}, {"phi", _MIX(phiv)}, {"inf", _MIX(infin)}, {"nan", _MI(?)}, {"ans", _MI(#)}
