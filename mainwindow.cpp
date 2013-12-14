@@ -172,48 +172,58 @@ void MainWindow::doApply(const QString &before, const QString &after)
 void MainWindow::doRun(const QString &value)
 {
     try
-     {
-         // Do calculation
-         calc.parse(value.toStdString());
-         OPParser::CalcData resultC = calc.finishByData();
-         mml.parse(value.toStdString());
-         OPParser::MMLData resultM = mml.finishByData();
+    {
+        // Do calculation
+        calc.parse(value.toStdString());
+        OPParser::CalcData resultC = calc.finishByData();
 
-         {
-             // Render result
-             using namespace OPParser;
-             resultM += _MO(=);
-             resultM += _MNVAL(std::to_string(resultC));
+        std::string resultS = value.toStdString();
+        {
+            // Generate output equation
+            std::ostringstream oss;
+            oss << resultC;
+            auto floatS = oss.str();
 
-             // Close MML
-             resultM = _MML(_MSTR(resultM));
-         }
+            // Format exp
+            auto ePos = floatS.find("e");
+            if (ePos != std::string::npos)
+            {
+                floatS.replace(ePos, 1, " e^");
+            }
 
-         // Print
-         ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
-         ui->frame->setContent(QString(resultM.c_str()));
+            resultS += "=";
+            resultS += floatS;
+        }
 
-         // Scale the font size to fit in
-         ui->frame->setBaseFontPointSize(16);
-         while (
-             (
-                 ui->frame->getSize().width() > ui->frame->width()
-                 ||
-                 ui->frame->getSize().height() > ui->frame->height()
-             )
-             &&
-             ui->frame->baseFontPointSize() > 8
-         )
-         {
-             ui->frame->setBaseFontPointSize(ui->frame->baseFontPointSize() - 1);
-         }
-     }
-     catch (const OPParser::opparser_error &e)
-     {
-         ui->statusBar->showMessage(QString(e.what()));
-         calc.init();
-         mml.init();
-     }
+        // Generate MML
+        mml.parse(resultS);
+        OPParser::MMLData resultM = mml.finishByData();
+
+        // Print
+        ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
+        ui->frame->setContent(QString(resultM.c_str()));
+
+        // Scale the font size to fit in
+        ui->frame->setBaseFontPointSize(16);
+        while (
+            (
+                ui->frame->getSize().width() > ui->frame->width()
+                ||
+                ui->frame->getSize().height() > ui->frame->height()
+            )
+            &&
+            ui->frame->baseFontPointSize() > 8
+        )
+        {
+            ui->frame->setBaseFontPointSize(ui->frame->baseFontPointSize() - 1);
+        }
+    }
+    catch (const OPParser::opparser_error &e)
+    {
+        ui->statusBar->showMessage(QString(e.what()));
+        calc.init();
+        mml.init();
+    }
 }
 
 void MainWindow::on_pushButton_57_clicked()

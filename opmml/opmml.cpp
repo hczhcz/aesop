@@ -1,6 +1,9 @@
 #include "opmml.hpp"
 
 namespace OPParser {
+    const Level levelEqualL = 127;
+    const Level levelEqualR = 128;
+
     map <Input, MMLString> MMLConst = {
         {"pi", _MIX(pi)}, {"tau", _MIX(tau)}, {"phi", _MIX(phiv)}, {"inf", _MIX(infin)}, {"nan", _MI(?)}, {"ans", _MI(#)}
     };
@@ -12,6 +15,7 @@ namespace OPParser {
     class MMLMonoToken;
     class MMLLeftToken;
     class MMLRightToken;
+    class MMLEqualToken;
     typedef shared_ptr <MMLToken       > PMMLToken;
     typedef shared_ptr <MMLFuncToken   > PMMLFuncToken;
     typedef shared_ptr <MMLAssignToken > PMMLAssignToken;
@@ -19,6 +23,7 @@ namespace OPParser {
     typedef shared_ptr <MMLMonoToken   > PMMLMonoToken;
     typedef shared_ptr <MMLLeftToken   > PMMLLeftToken;
     typedef shared_ptr <MMLRightToken  > PMMLRightToken;
+    typedef shared_ptr <MMLEqualToken  > PMMLEqualToken;
 
     // Tokens
 
@@ -33,6 +38,7 @@ namespace OPParser {
         friend class MMLBiToken;
         friend class MMLMonoToken;
         friend class MMLRightToken;
+        friend class MMLEqualToken;
 
         MMLToken(MMLString toData, MMLType toType = mtNum): value(toData, toType) {}
 
@@ -382,6 +388,41 @@ namespace OPParser {
         }
     };
 
+    // Equal sign
+    class MMLEqualToken: public Token {
+    public:
+        Level levelLeft() const {
+            return levelEqualL;
+        }
+
+        Level levelRight() const {
+            return levelEqualR;
+        }
+
+        void onPush(Parser &parser) {
+            parser.state = stateNum;
+        }
+
+        void onPop(Parser &parser) {
+            check(parser.outStack.size() >= 2, "No operand");
+
+            // Cast the tokens
+            // Tokens in outStack should be numbers
+            PMMLToken tRight = dynamic_pointer_cast <MMLToken> (
+                parser.outStack.back()
+            );
+            parser.outStack.pop_back();
+            PMMLToken tLeft = dynamic_pointer_cast <MMLToken> (
+                parser.outStack.back()
+            );
+
+            check(tRight != nullptr && tLeft != nullptr, "Unknown operand");
+
+            // Render equation
+            tLeft->value = _MPRE(tLeft->value) _MO(=) _MPOST(tRight->value);
+        }
+    };
+
     // Lexers
 
     // Numbers
@@ -540,6 +581,9 @@ namespace OPParser {
                 break;
             case '!':
                 token = PToken(new MMLMonoToken(mtFac));
+                break;
+            case '=':
+                token = PToken(new MMLEqualToken());
                 break;
             }
 
@@ -704,6 +748,7 @@ namespace OPParser {
 
         check(tResult != nullptr, "Bad result");
 
-        return tResult->value;
+        // Close MML and return
+        return _MML(_MSTR(tResult->value));
     }
 }

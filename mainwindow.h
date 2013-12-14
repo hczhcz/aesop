@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <sstream>
 #include "mmlwidget/QtMmlWidget"
 #include "opparser/opcalc.hpp"
 #include "opparser/opcalcnear.hpp"
