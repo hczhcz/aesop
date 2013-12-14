@@ -29,48 +29,9 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         // Do nothing
         return;
     }
-    try
+    else
     {
-        // Do calculation
-        calc.parse(arg1.toStdString());
-        OPParser::CalcData resultC = calc.finishByData();
-        mml.parse(arg1.toStdString());
-        OPParser::MMLData resultM = mml.finishByData();
-
-        {
-            // Render result
-            using namespace OPParser;
-            resultM += _MO(=);
-            resultM += _MNVAL(std::to_string(resultC));
-
-            // Close MML
-            resultM = _MML(_MSTR(resultM));
-        }
-
-        // Print
-        ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
-        ui->frame->setContent(QString(resultM.c_str()));
-
-        // Scale the size to fit in
-        ui->frame->setBaseFontPointSize(16);
-        while (
-            (
-                ui->frame->getSize().width() > ui->frame->width()
-                ||
-                ui->frame->getSize().height() > ui->frame->height()
-            )
-            &&
-            ui->frame->baseFontPointSize() > 8
-        )
-        {
-            ui->frame->setBaseFontPointSize(ui->frame->baseFontPointSize() - 1);
-        }
-    }
-    catch (const OPParser::opparser_error &e)
-    {
-        ui->statusBar->showMessage(QString(e.what()));
-        calc.init();
-        mml.init();
+        doRun(arg1);
     }
 }
 
@@ -84,11 +45,19 @@ void MainWindow::on_input()
 
 void MainWindow::on_input_f()
 {
-    // Insert the string from the button text
-    doInsert(
-          ((QPushButton *) sender())->text()
-        + "()"
-    , -1);
+    if (ui->pushButton_12->isChecked())
+    {
+        // Insert the string from the button text
+        doInsert(
+              ((QPushButton *) sender())->text()
+            + "()"
+        , -1);
+    }
+    else
+    {
+        // Apply the string from the button text
+        doApply(((QPushButton *) sender())->text() + "(", ")");
+    }
 }
 
 void MainWindow::on_input_sct()
@@ -96,23 +65,47 @@ void MainWindow::on_input_sct()
     const bool needDeg = ui->pushButton_13->isChecked();
     const bool needArc = ui->pushButton_14->isChecked();
 
-    // Insert "deg()" for arc func
-    if (needDeg && needArc)
+    if (ui->pushButton_12->isChecked())
     {
-        doInsert("deg()", -1);
+        // Insert "deg()" for arc func
+        if (needDeg && needArc)
+        {
+            doInsert("deg()", -1);
+        }
+
+        // Insert the string from the button text and "arc" button
+        doInsert(
+              (needArc ? "a" : "")
+            + ((QPushButton *) sender())->text()
+            + "()"
+        , -1);
+
+        // Insert "rad()" for non-arc func
+        if (needDeg && !needArc)
+        {
+            doInsert("rad()", -1);
+        }
     }
-
-    // Insert the string from the button text and "arc" button
-    doInsert(
-          (needArc ? "a" : "")
-        + ((QPushButton *) sender())->text()
-        + "()"
-    , -1);
-
-    // Insert "rad()" for non-arc func
-    if (needDeg && !needArc)
+    else
     {
-        doInsert("rad()", -1);
+        // Apply "rad()" for non-arc func
+        if (needDeg && !needArc)
+        {
+            doApply("rad(", ")");
+        }
+
+        // Apply the string from the button text and "arc" button
+        doApply(
+              (needArc ? "a" : "")
+            + ((QPushButton *) sender())->text()
+            + "("
+        , ")");
+
+        // Apply "deg()" for arc func
+        if (needDeg && needArc)
+        {
+            doApply("deg(", ")");
+        }
     }
 
 }
@@ -121,12 +114,24 @@ void MainWindow::on_input_scth()
 {
     const bool needArc = ui->pushButton_14->isChecked();
 
-    // Insert the string from the button text and "arc" button
-    doInsert(
-          (needArc ? "a" : "")
-        + ((QPushButton *) sender())->text()
-        + "()"
-    , -1);
+    if (ui->pushButton_12->isChecked())
+    {
+        // Insert the string from the button text and "arc" button
+        doInsert(
+              (needArc ? "a" : "")
+            + ((QPushButton *) sender())->text()
+            + "()"
+        , -1);
+    }
+    else
+    {
+        // Apply the string from the button text and "arc" button
+        doApply(
+              (needArc ? "a" : "")
+            + ((QPushButton *) sender())->text()
+            + "("
+        , ")");
+    }
 }
 
 void MainWindow::doInsert(const QString &value, const int offset)
@@ -159,6 +164,58 @@ void MainWindow::doInsert(const QString &value, const int offset)
     ui->lineEdit->setCursorPosition(ui->lineEdit->cursorPosition() + offset);
 }
 
+void MainWindow::doApply(const QString &before, const QString &after)
+{
+    ui->lineEdit->setText(before + ui->lineEdit->text() + after);
+}
+
+void MainWindow::doRun(const QString &value)
+{
+    try
+     {
+         // Do calculation
+         calc.parse(value.toStdString());
+         OPParser::CalcData resultC = calc.finishByData();
+         mml.parse(value.toStdString());
+         OPParser::MMLData resultM = mml.finishByData();
+
+         {
+             // Render result
+             using namespace OPParser;
+             resultM += _MO(=);
+             resultM += _MNVAL(std::to_string(resultC));
+
+             // Close MML
+             resultM = _MML(_MSTR(resultM));
+         }
+
+         // Print
+         ui->statusBar->showMessage(QString(std::to_string(resultC).c_str()));
+         ui->frame->setContent(QString(resultM.c_str()));
+
+         // Scale the font size to fit in
+         ui->frame->setBaseFontPointSize(16);
+         while (
+             (
+                 ui->frame->getSize().width() > ui->frame->width()
+                 ||
+                 ui->frame->getSize().height() > ui->frame->height()
+             )
+             &&
+             ui->frame->baseFontPointSize() > 8
+         )
+         {
+             ui->frame->setBaseFontPointSize(ui->frame->baseFontPointSize() - 1);
+         }
+     }
+     catch (const OPParser::opparser_error &e)
+     {
+         ui->statusBar->showMessage(QString(e.what()));
+         calc.init();
+         mml.init();
+     }
+}
+
 void MainWindow::on_pushButton_57_clicked()
 {
     ui->lineEdit->backspace();
@@ -169,10 +226,12 @@ void MainWindow::on_pushButton_58_clicked()
     ui->lineEdit->clear();
 }
 
-void MainWindow::on_pushButton_59_clicked(bool checked)
+void MainWindow::on_pushButton_59_clicked()
 {
-    if (checked)
-    {
-        ui->lineEdit->textChanged(ui->lineEdit->text());
-    }
+    on_lineEdit_textChanged(ui->lineEdit->text());
+}
+
+void MainWindow::on_lineEdit_returnPressed()
+{
+    doRun(ui->lineEdit->text());
 }

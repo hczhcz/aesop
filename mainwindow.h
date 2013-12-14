@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+
 private slots:
     void on_lineEdit_textChanged(const QString &arg1);
 
@@ -26,7 +26,9 @@ private slots:
 
     void on_pushButton_58_clicked();
 
-    void on_pushButton_59_clicked(bool checked);
+    void on_pushButton_59_clicked();
+
+    void on_lineEdit_returnPressed();
 
 public slots:
     void on_input();
@@ -39,7 +41,14 @@ private:
     OPParser::Calc calc;
     OPParser::MML mml;
 
+    // 1+_ -> 1+sin(_)
     void doInsert(const QString &value, const int offset = 0);
+
+    // 1+2 -> sin(1+2)
+    void doApply(const QString &before, const QString &after);
+
+    // Parse, run and print result
+    void doRun(const QString &value);
 };
 
 #endif // MAINWINDOW_H
