@@ -226,12 +226,12 @@ namespace OPParser {
         MMLBiToken(BiOperType toType): type(toType) {}
 
         Level levelLeft() const {
-            const Level toMap[] = {levelAddSubL, levelAddSubL, levelMulDivL, levelMulDivL, levelMulDivL, levelPwrL};
+            const Level toMap[] = {levelAddSubL, levelAddSubL, levelMulDivL, levelIMulL, levelMulDivL, levelMulDivL, levelPwrL};
             return toMap[type];
         }
 
         Level levelRight() const {
-            const Level toMap[] = {levelAddSubR, levelAddSubR, levelMulDivR, levelMulDivR, levelMulDivR, levelPwrR};
+            const Level toMap[] = {levelAddSubR, levelAddSubR, levelMulDivR, levelIMulR, levelMulDivR, levelMulDivR, levelPwrR};
             return toMap[type];
         }
 
@@ -264,6 +264,9 @@ namespace OPParser {
                 break;
             case otMul:
                 tLeft->value = _MPRE(tLeft->value) _MO(*) _MPOST(tRight->value);
+                break;
+            case otIMul:
+                tLeft->value = _MPRE(tLeft->value) _MOX(InvisibleTimes) _MPOST(tRight->value);
                 break;
             case otDiv:
                 if (tLeft->value.type == mtBracket && tRight->value.type == mtBracket) {
@@ -681,7 +684,7 @@ namespace OPParser {
     class MMLImplicitMulLexer: public Lexer {
     public:
         bool tryGetToken(InputIter &now, const InputIter &end, Parser &parser) {
-            PToken token(new MMLBiToken(otMul));
+            PToken token(new MMLBiToken(otIMul));
             parser.midPush(token);
             return 1;
         }
