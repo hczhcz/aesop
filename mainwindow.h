@@ -33,6 +33,7 @@ private slots:
 
 public slots:
     void on_input();
+    void on_input_o();
     void on_input_f();
     void on_input_sct();
     void on_input_scth();

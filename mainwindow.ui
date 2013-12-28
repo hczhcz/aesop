@@ -1786,7 +1786,7 @@
    <sender>pushButton_20</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -1802,7 +1802,7 @@
    <sender>pushButton_21</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -1818,7 +1818,7 @@
    <sender>pushButton_22</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -1834,7 +1834,7 @@
    <sender>pushButton_23</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -2042,7 +2042,7 @@
    <sender>pushButton_36</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -2058,7 +2058,7 @@
    <sender>pushButton_37</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -2074,7 +2074,7 @@
    <sender>pushButton_38</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_input()</slot>
+   <slot>on_input_o()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>

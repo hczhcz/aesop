@@ -37,17 +37,33 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
 void MainWindow::on_input()
 {
-    // Insert the string from the button tool tip
+    // Insert the string from the button's tool tip
     doInsert(
         ((QPushButton *) sender())->toolTip()
     );
+}
+
+void MainWindow::on_input_o()
+{
+    if (ui->pushButton_12->isChecked())
+    {
+        // Insert the string from the button's tool tip
+        doInsert(
+            ((QPushButton *) sender())->toolTip()
+        );
+    }
+    else
+    {
+        // Apply the string from the button's tool tip
+        doApply("(", ")" + ((QPushButton *) sender())->toolTip());
+    }
 }
 
 void MainWindow::on_input_f()
 {
     if (ui->pushButton_12->isChecked())
     {
-        // Insert the string from the button text
+        // Insert the string from the button's text
         doInsert(
               ((QPushButton *) sender())->text()
             + "()"
@@ -55,7 +71,7 @@ void MainWindow::on_input_f()
     }
     else
     {
-        // Apply the string from the button text
+        // Apply the string from the button's text
         doApply(((QPushButton *) sender())->text() + "(", ")");
     }
 }
@@ -73,7 +89,7 @@ void MainWindow::on_input_sct()
             doInsert("deg()", -1);
         }
 
-        // Insert the string from the button text and "arc" button
+        // Insert the string from the button's text and "arc" button
         doInsert(
               (needArc ? "a" : "")
             + ((QPushButton *) sender())->text()
@@ -94,7 +110,7 @@ void MainWindow::on_input_sct()
             doApply("rad(", ")");
         }
 
-        // Apply the string from the button text and "arc" button
+        // Apply the string from the button's text and "arc" button
         doApply(
               (needArc ? "a" : "")
             + ((QPushButton *) sender())->text()
@@ -116,7 +132,7 @@ void MainWindow::on_input_scth()
 
     if (ui->pushButton_12->isChecked())
     {
-        // Insert the string from the button text and "arc" button
+        // Insert the string from the button's text and "arc" button
         doInsert(
               (needArc ? "a" : "")
             + ((QPushButton *) sender())->text()
@@ -125,7 +141,7 @@ void MainWindow::on_input_scth()
     }
     else
     {
-        // Apply the string from the button text and "arc" button
+        // Apply the string from the button's text and "arc" button
         doApply(
               (needArc ? "a" : "")
             + ((QPushButton *) sender())->text()
@@ -195,7 +211,7 @@ void MainWindow::doRun(const QString &value)
                 const auto found2 = OPParser::NearValue.find(-resultCNear);
                 if (found2 != OPParser::NearValue.end())
                 {
-                    resultS += "=" + found2->second;
+                    resultS += "=-(" + found2->second + ")";
                 }
             }
         }
